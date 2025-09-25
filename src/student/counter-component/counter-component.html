@@ -1,0 +1,15 @@
+<div class="counter-container">
+  <h2>Compteur: {{ count() }}</h2>
+  <h4>Double : {{ dcount() }}</h4>
+  <h4>Triple : {{ tcount() }}</h4>
+  <div class="button-group">
+    <button (click)="increment()">+1</button>
+    <button (click)="reset()">Reset</button>
+  </div>
+
+  <div class = "username">
+    <h5>Nom d'utilisateur: {{ username() }}</h5>
+    <button (click)="changeUsername()">Changer de nom</button>
+  </div>
+
+</div>

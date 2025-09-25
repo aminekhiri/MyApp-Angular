@@ -1,0 +1,46 @@
+.student-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+app-student-card {
+  margin-bottom: 20px;
+  display: block;
+  width: 400px;
+  max-width: 90%;
+  transition: all 0.5s ease-in-out;
+  height: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+app-student-card.hidden-card {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  transform: translateY(-20px) scale(0.9);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+h3 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.student-status {
+  font-size: 1.2em;
+  text-align: center;
+  color: #ffffff;
+  background-color: #0b2ceb;
+  width: 310px;
+  border-radius: 5px;
+}
+
+.nbEtudiants {
+  padding-bottom: 15px;
+}

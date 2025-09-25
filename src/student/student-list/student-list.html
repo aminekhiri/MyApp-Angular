@@ -1,0 +1,49 @@
+<h3>List of Students</h3>
+<h2 class = "nbEtudiants" > Nombre d'etudiants: {{ count() }}</h2>
+<div class="student-container">
+    <!-- @for (studentObj of students; track studentObj.student.id; let i = $index) {
+        <div>
+            @switch (studentObj.student.anneeInscrit()) {
+                @case ('nouvel inscrit') {
+                    <div class="student-status">🥂 Nouvel inscrit</div>
+                }
+                @case ('étudiant') {
+                    <div class="student-status">🎓 Etudiant</div>
+                }
+                @case ('alumni') {
+                    <div class="student-status">📚 Alumni</div>
+                }
+            }
+            
+            <app-student-card 
+                [class.hidden-card]="studentObj.student.hidden"
+                [firstname]="studentObj.student.firstname"
+                [name]="studentObj.student.name"
+                [filiere]="studentObj.student.filiere"
+                [promo]="studentObj.student.promo"
+                [paye]="studentObj.student.paye"
+                [date]="studentObj.student.date"
+                (remove)="onDelete(i)">
+            </app-student-card>
+        </div>
+    } -->
+
+        @for (Student of svc.students(); track Student.id; let i = $index) {
+        <div>
+
+            <app-student-card 
+                [class.hidden-card]="Student.hidden"
+                [firstname]="Student.firstname"
+                [name]="Student.name"
+                [filiere]="Student.filiere"
+                [promo]="Student.promo"
+                [paye]="Student.paye"
+                [date]="Student.date"
+                (remove)="removeStudent(Student.id)">
+            </app-student-card>
+        </div>
+    }
+
+
+
+</div>
