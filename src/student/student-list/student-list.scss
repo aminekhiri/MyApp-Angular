@@ -44,3 +44,19 @@ h3 {
 .nbEtudiants {
   padding-bottom: 15px;
 }
+
+
+.add-student-form {
+  display: inline-block;
+  flex-direction: row;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+#firstname, #name, #date, #filiere, #promo, #paye {
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  display: inline-block;
+}

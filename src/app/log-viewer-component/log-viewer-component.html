@@ -1,0 +1,22 @@
+
+
+<h3>Log Entries</h3>
+<div class ="log-entries">
+    
+    @for (log of svc.getEntries(); track log.id) {
+        <div class="log-entry">
+            <p>{{ log.timestamp }} - {{ log.message }}</p>
+            @if (log.scope === undefined) {
+                <p>(No Scope)</p>
+            } @else {
+                <p>({{ log.scope }})</p>
+            }
+        </div>
+    }
+
+
+</div>
+
+
+
+<button class="clear-btn" (click)="svc.clear()">Reset</button>

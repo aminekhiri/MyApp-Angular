@@ -5,10 +5,11 @@ import { StudentCard } from '../student/student-card/student-card';
 import { UpperCasePipe } from '@angular/common';
 import { StudentList } from '../student/student-list/student-list';
 import { CounterComponent } from '../student/counter-component/counter-component';
+import { LogViewerComponent } from './log-viewer-component/log-viewer-component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HelloStudent, StudentCard, StudentList, CounterComponent], //on a crée en standalone donc les composants sont indépedants
+  imports: [RouterOutlet, HelloStudent, StudentCard, StudentList, CounterComponent, LogViewerComponent], //on a crée en standalone donc les composants sont indépedants
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

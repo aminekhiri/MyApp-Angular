@@ -6,6 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoggingService } from '../../app/logging-service';
 
 @Component({
   selector: 'app-student-list',
@@ -56,6 +57,7 @@ export class StudentList {
     },
     
   ];  
+  static logging: any;
 
   onDelete(index: number) {
     // Au lieu de supprimer, on cache l'étudiant
@@ -86,32 +88,45 @@ export class StudentList {
   count = signal(this.svc.students().length)
 
 
-  add(name: string, date: Date, firstname: string, filiere: string, promo: number, paye: number): void {
+  add(name: string, date: number, firstname: string, filiere: string, promo: number, paye: number): void {
     if (!name || !date || !firstname || !filiere || !promo || !paye) return
     this.svc.add({
       id: this.svc.students().length + 1,
       name,
-      date,
+      date: new Date(date),
       firstname,
       filiere,
       promo,
       paye,
       hidden: false
     })
+    this.count.update( c => c + 1);
+    // Log l'ajout de l'étudiant
+    this.logging.log(`Nouvel étudiant ajouté: ${firstname} ${name} - Filière: ${filiere}`, 'StudentList');
   }
   
   promote(id: number): void {
     const s = this.svc.findById(id)
     if (s) {
-      this.svc.update({ id, date: new Date(s.date.getTime() + 1) })
+      this.svc.update({ id, date: new Date(s.date.getTime() + 1) });
     }
   }
 
   removeStudent(id: number): void {
     const student = this.svc.findById(id)
     if (student) {
+      // Log la suppression avant de supprimer
+      this.logging.log(`Étudiant supprimé: ${student.firstname} ${student.name}`, 'StudentList');
       this.svc.remove(id)
       this.count.update( c => c - 1);
+    }
+  }
+
+  logging = inject(LoggingService);
+
+  logAllStudents(): void {
+    for(let student of this.svc.students()) {
+      this.logging.log(`Student: ${student.firstname} ${student.name}`, 'StudentList');
     }
   }
 
