@@ -29,7 +29,7 @@
     } -->
 
 
-    <form class="add-student-form">
+    <!-- <form class="add-student-form">
         <h3>Ajouter un étudiant</h3>
         <label for="firstname">Prénom:</label>
         <input type="text" id="firstname" #firstname required>
@@ -51,7 +51,7 @@
 
         <button type="button" (click)="add(name.value, date.valueAsNumber, firstname.value, filiere.value, promo.valueAsNumber, paye.valueAsNumber)">Ajouter</button>
 
-    </form>
+    </form> -->
 
         @for (Student of svc.students(); track Student.id; let i = $index) {
         <div>

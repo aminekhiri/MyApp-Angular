@@ -17,7 +17,17 @@ export class StudentService {
   ])
   readonly students = this._students.asReadonly() // Contrat public : lecture seule
 
-  add(student: StudentDto): void {
+  add(name: string, paye: number, date: Date, firstname: string, filiere: string, promo: number): void {
+    const student: StudentDto = {
+      id: Math.random(), // Générer un ID aléatoire
+      name,
+      paye,
+      date,
+      firstname,
+      filiere,
+      promo,
+      hidden: false
+    };
     this._students.update(list => [...list, student])
   }
   remove(id: number): void {

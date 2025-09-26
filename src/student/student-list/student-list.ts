@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoggingService } from '../../app/logging-service';
+import { StudentStore } from '../../app/student.store';
 
 @Component({
   selector: 'app-student-list',
@@ -16,7 +17,7 @@ import { LoggingService } from '../../app/logging-service';
 })
 export class StudentList {
 
-  
+  //ancienne liste d'étudiants avant qu'on utilise le service
   students = [
     {
       student: new StudentClass(
@@ -57,7 +58,6 @@ export class StudentList {
     },
     
   ];  
-  static logging: any;
 
   onDelete(index: number) {
     // Au lieu de supprimer, on cache l'étudiant
@@ -88,22 +88,22 @@ export class StudentList {
   count = signal(this.svc.students().length)
 
 
-  add(name: string, date: number, firstname: string, filiere: string, promo: number, paye: number): void {
-    if (!name || !date || !firstname || !filiere || !promo || !paye) return
-    this.svc.add({
-      id: this.svc.students().length + 1,
-      name,
-      date: new Date(date),
-      firstname,
-      filiere,
-      promo,
-      paye,
-      hidden: false
-    })
-    this.count.update( c => c + 1);
-    // Log l'ajout de l'étudiant
-    this.logging.log(`Nouvel étudiant ajouté: ${firstname} ${name} - Filière: ${filiere}`, 'StudentList');
-  }
+  // add(name: string, date: number, firstname: string, filiere: string, promo: number, paye: number): void {
+  //   if (!name || !date || !firstname || !filiere || !promo || !paye) return
+  //   this.svc.add({
+  //     id: this.svc.students().length + 1,
+  //     name,
+  //     date: new Date(date),
+  //     firstname,
+  //     filiere,
+  //     promo,
+  //     paye,
+  //     hidden: false
+  //   })
+  //   this.count.update( c => c + 1);
+  //   // Log l'ajout de l'étudiant
+  //   this.logging.log(`Nouvel étudiant ajouté: ${firstname} ${name} - Filière: ${filiere}`, 'StudentList');
+  // }
   
   promote(id: number): void {
     const s = this.svc.findById(id)
@@ -129,6 +129,12 @@ export class StudentList {
       this.logging.log(`Student: ${student.firstname} ${student.name}`, 'StudentList');
     }
   }
+
+
+  store = inject(StudentStore);
+
+
+
 
 
 
