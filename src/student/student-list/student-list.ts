@@ -134,6 +134,9 @@ export class StudentList {
   store = inject(StudentStore);
 
 
+  //on recoit les infos du form  depuis le output
+  
+  
 
 
 

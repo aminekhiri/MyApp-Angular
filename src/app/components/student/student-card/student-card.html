@@ -1,0 +1,27 @@
+
+<div 
+  class="presentation"
+  [class.selected]="isSelected()"
+  (click)="onCardClick()"> <!-- c'est pour qu'on puisse cliquer sur la carte-->
+    <h3>Student Card</h3>
+    <div class="student-info" >
+
+    
+    <p id="name">Nom: {{ firstname() }} {{name() | uppercase}}</p>
+    <p id="promo">Program: {{filiere()}} {{promo()}}</p>
+    <p id="paye">paid {{paye()}}€</p>    
+    <p id="date-inscripion">created at {{date() | date:'longDate'}}</p>
+    
+    <!-- @if (student.anneeInscrit() == 0) {
+        <p>🥂 Élève {{ student.name }} en dernière année</p>
+    } @else {
+        <p>🚶 Élève {{ student.name }} a encore du chemin à faire</p>
+    } -->
+
+
+    <!-- <button id="delete-btn" (click)="onDelete()">Supprimer</button> -->
+
+    <button id="delete-btn" (click)="onDelete()">Supprimer</button>
+
+</div>
+

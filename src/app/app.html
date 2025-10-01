@@ -1,6 +1,22 @@
-<app-hello-student></app-hello-student>
+<!-- <app-hello-student></app-hello-student>
 
-<app-log-viewer-component></app-log-viewer-component>
-<app-student-form-component></app-student-form-component>
+
 <app-student-list></app-student-list>
-<app-counter-component></app-counter-component>
+ -->
+
+
+
+<div class="nav-links">
+    <nav>
+        <a routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        <a routerLink="about" routerLinkActive="active-link">About</a>
+        <a routerLink="students" routerLinkActive="active-link">Students</a>
+    </nav>
+</div>
+<!-- <app-log-viewer-component></app-log-viewer-component> -->
+<router-outlet></router-outlet>
+
+<!-- <les roouterLinkActive c'est pour que quand on est sur la page acceuil le lien acceuil soit souligné et quand on est sur la page about le lien about soit souligné>
+<le [routerLinkActiveOptions]="{ exact: true }" c'est pour que le lien acceuil soit souligné seulement quand on est sur la page acceuil et pas sur les autres pages> -->
+
+<!-- <app-counter-component></app-counter-component> -->

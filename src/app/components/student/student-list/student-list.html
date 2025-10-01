@@ -1,0 +1,107 @@
+<h3>List of Students</h3>
+
+<app-log-viewer-component></app-log-viewer-component>
+
+<h2 class = "nbEtudiants" > Nombre d'etudiants: {{ count() }}</h2>
+
+<!-- Bouton pour afficher/masquer le formulaire -->
+<div class="form-controls">
+  <button 
+    mat-raised-button 
+    color="primary" 
+    (click)="toggleForm()"
+    class="add-student-btn">
+    <mat-icon>{{ showForm() ? 'close' : 'add' }}</mat-icon>
+    {{ showForm() ? 'Annuler' : 'Inscrire un étudiant' }}
+  </button>
+</div>
+
+<!-- Formulaire d'ajout/édition (conditionnel) -->
+@if (showForm()) {
+  <div class="form-container">
+    <h4>{{ selectedStudent() ? 'Modifier l\'étudiant' : 'Inscription d\'un nouvel étudiant' }}</h4>
+    <app-student-form-component 
+      [studentToEdit]="selectedStudent()"
+      (studentSubmit)="onStudentSubmitted($event)">
+    </app-student-form-component>
+  </div>
+}
+
+<div class="student-container">
+    <!-- @for (studentObj of students; track studentObj.student.id; let i = $index) {
+        <div>
+            @switch (studentObj.student.anneeInscrit()) {
+                @case ('nouvel inscrit') {
+                    <div class="student-status">🥂 Nouvel inscrit</div>
+                }
+                @case ('étudiant') {
+                    <div class="student-status">🎓 Etudiant</div>
+                }
+                @case ('alumni') {
+                    <div class="student-status">📚 Alumni</div>
+                }
+            }
+            
+            <app-student-card 
+                [class.hidden-card]="studentObj.student.hidden"
+                [firstname]="studentObj.student.firstname"
+                [name]="studentObj.student.name"
+                [filiere]="studentObj.student.filiere"
+                [promo]="studentObj.student.promo"
+                [paye]="studentObj.student.paye"
+                [date]="studentObj.student.date"
+                (remove)="onDelete(i)">
+            </app-student-card>
+        </div>
+    } -->
+
+
+    <!-- <form class="add-student-form">
+        <h3>Ajouter un étudiant</h3>
+        <label for="firstname">Prénom:</label>
+        <input type="text" id="firstname" #firstname required>
+
+        <label for="name">Nom:</label>
+        <input type="text" id="name" #name required>
+
+        <label for="date">Date d'inscription:</label>
+        <input type="date" id="date" #date required>
+
+        <label for="filiere">Filière:</label>
+        <input type="text" id="filiere" #filiere required>
+
+        <label for="promo">Promo:</label>
+        <input type="number" id="promo" #promo required>
+
+        <label for="paye">Payé:</label>
+        <input type="number" id="paye" #paye>
+
+        <button type="button" (click)="add(name.value, date.valueAsNumber, firstname.value, filiere.value, promo.valueAsNumber, paye.valueAsNumber)">Ajouter</button>
+
+    </form> -->
+
+        @for (Student of svc.students(); track Student.id; let i = $index) {
+        <div>
+
+            <app-student-card 
+                [class.hidden-card]="Student.hidden"
+                [firstname]="Student.firstname"
+                [name]="Student.name"
+                [filiere]="Student.filiere"
+                [promo]="Student.promo"
+                [paye]="Student.paye"
+                [date]="Student.date"
+                [id]="Student.id"
+                [isSelected]="selectedId() === Student.id"
+                (remove)="removeStudent(Student.id)"
+                (select)="onStudentSelected($event)">
+            </app-student-card>
+        </div>
+    }
+
+
+
+</div>
+
+
+<app-counter-component></app-counter-component>
