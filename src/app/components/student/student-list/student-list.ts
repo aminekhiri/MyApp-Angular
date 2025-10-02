@@ -20,56 +20,6 @@ import { LogViewerComponent } from '../../log-viewer-component/log-viewer-compon
 })
 export class StudentList {
 
-  //ancienne liste d'étudiants avant qu'on utilise le service
-  // students = [
-  //   {
-  //     student: new StudentClass(
-  //       1,
-  //       'Amine',
-  //       'Khiri',
-  //       'DaMS',
-  //       4,
-  //       5000,
-  //       new Date(),
-  //       false
-  //     ),
-
-  //   },
-  //   {
-  //     student: new StudentClass(
-  //       2,
-  //       'Sarah',
-  //       'Martin',
-  //       'Informatique',
-  //       3,
-  //       4500,
-  //       new Date('2024-09-15'),
-  //       false
-  //     ),
-  //   },
-  //   {
-  //     student: new StudentClass(
-  //       3,
-  //       'Thomas',
-  //       'Dubois',
-  //       'Marketing',
-  //       2,
-  //       3800,
-  //       new Date('2020-01-20'),
-  //       false
-  //     ),
-  //   },
-    
-  // ];  
-
-  // onDelete(index: number) {
-  //   // Au lieu de supprimer, on cache l'étudiant
-  //   // this.students[index].student.hidden = true;
-  //   this.count.update( c => c - 1);
-  //   // const deletedStudent = this.students[index].student;
-  //   // this.studentDeleted.set(deletedStudent);
-
-  // }
   studentDeleted = signal<StudentClass | null>(null);
 
 
