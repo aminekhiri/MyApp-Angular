@@ -10,10 +10,13 @@ import { LoggingService } from '../../../services/logging-service';
 import { StudentStore } from '../../../stores/student.store';
 import { StudentFormComponent } from '../student-form-component/student-form-component';
 import { LogViewerComponent } from '../../log-viewer-component/log-viewer-component';
+import { Router, RouterLink } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-student-list',
-  imports: [StudentCard, MatToolbarModule, MatButtonModule, MatIconModule, StudentFormComponent, LogViewerComponent],
+  imports: [RouterLink, StudentCard, MatToolbarModule, MatButtonModule, MatIconModule, StudentFormComponent, LogViewerComponent],
   templateUrl: './student-list.html',
   styleUrls: ['./student-list.scss']
 })
@@ -176,6 +179,14 @@ export class StudentList {
       
       console.log('Étudiant mis à jour:', updatedStudent); // l'etudiant
     }
+  }
+
+
+
+  //on va faire un sorte de pouvoir aller dans le student detail component avec le router 
+  router = inject(Router);
+  goToStudentDetail(id: number) {
+    this.router.navigate(['/students', id]);
   }
 
 }

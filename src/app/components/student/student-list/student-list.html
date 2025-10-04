@@ -95,6 +95,11 @@
                 (remove)="removeStudent(Student.id)"
                 (select)="onStudentSelected($event)">
             </app-student-card>
+            <div class="card-actions">
+                <a [routerLink]="['/students', Student.id]" class="btn btn-primary">
+                    Voir détail
+                </a>
+            </div>
         </div>
     }
 
