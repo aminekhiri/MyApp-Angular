@@ -6,7 +6,6 @@ export interface Student {
     promo: number
     paye: number
     date: Date
-    hidden: boolean
 }
 
 type StudentPartial = Partial<Student>

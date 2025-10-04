@@ -29,18 +29,11 @@ export class StudentCard {
     this.remove.emit();
   }
 
-  removeStudent(id: number) {
-    this.remove.emit();
-  }
-
   onCardClick() {
       const studentId = this.id();
       if (studentId) {
       this.select.emit(studentId);
     }
   }
-
-  svc = new StudentService();
-  // student = new StudentClass("this.firstname", "this.name", "this.filiere", this.promo, this.paye, this.date, false);
 
 }

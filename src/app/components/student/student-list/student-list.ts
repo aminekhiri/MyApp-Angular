@@ -9,12 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { LoggingService } from '../../../services/logging-service';
 import { StudentStore } from '../../../stores/student.store';
 import { StudentFormComponent } from '../student-form-component/student-form-component';
-import { CounterComponent } from '../counter-component/counter-component';
 import { LogViewerComponent } from '../../log-viewer-component/log-viewer-component';
 
 @Component({
   selector: 'app-student-list',
-  imports: [StudentCard, MatToolbarModule, MatButtonModule, MatIconModule, StudentFormComponent, CounterComponent, LogViewerComponent],
+  imports: [StudentCard, MatToolbarModule, MatButtonModule, MatIconModule, StudentFormComponent, LogViewerComponent],
   templateUrl: './student-list.html',
   styleUrls: ['./student-list.scss']
 })
@@ -49,14 +48,17 @@ export class StudentList {
 
 
   readonly svc = inject(StudentService)  
+  //svc est une instance de StudentService que l'on peut utiliser dans ce composant
+
+
   count = signal(this.svc.students().length)
   
   // Signal pour contrôler l'affichage du formulaire
   showForm = signal(false)
   
   // Signaux pour la sélection d'étudiants
-  selectedStudent = signal<Student | null>(null)
-  selectedId = signal<number | null>(null)
+  selectedStudent = signal<Student | null>(null) //ce signal va contenir l'étudiant sélectionné ou null si aucun étudiant n'est sélectionné pour que le formulaire puisse être en mode édition ou ajout
+  selectedId = signal<number | null>(null) // ce signal va contenir l'ID de l'étudiant sélectionné ou null si aucun étudiant n'est sélectionné pour que la carte puisse savoir si elle est sélectionnée ou pas
 
 
   // add(name: string, date: number, firstname: string, filiere: string, promo: number, paye: number): void {
@@ -104,7 +106,7 @@ export class StudentList {
 
   store = inject(StudentStore);
 
-  // Méthode appelée par le composant parent pour ajouter un étudiant
+  // Méthode du service appelée par le composant parent pour ajouter un étudiant
   addStudent(studentDto: Student) {
     this.svc.add(studentDto.name, studentDto.paye, studentDto.date, studentDto.firstname, studentDto.filiere, studentDto.promo);
     
@@ -135,17 +137,27 @@ export class StudentList {
     }
     // Masquer le formulaire et réinitialiser la sélection après soumission
     this.showForm.set(false);
-    this.selectedStudent.set(null);
+    this.selectedStudent.set(null); //on désélectionne l'étudiant après soumission
+    this.selectedId.set(null); //on désélectionne l'ID après soumission
   }
 
   // Méthode appelée quand une carte d'étudiant est cliquée
   onStudentSelected(studentId: number) {
     const student = this.svc.findById(studentId);
     if (student) {
-      this.selectedStudent.set(student);
-      // Afficher le formulaire en mode édition
-      this.showForm.set(true);
-      console.log('Student sélectionné pour édition:', student);
+      // Vérifier si l'étudiant est déjà sélectionné
+      if (this.selectedId() === studentId) {
+        // Désélectionner si c'est le même étudiant
+        this.selectedStudent.set(null); //le signal selectedStudent est mis à null pour désélectionner l'étudiant
+        this.showForm.set(false); //on masque le formulaire
+        this.selectedId.set(null); //on désélectionne l'ID
+      } else {
+        // Sélectionner le nouvel étudiant
+        this.selectedStudent.set(student); //le signal selectedStudent est mis à l'étudiant sélectionné pour que le formulaire puisse être en mode édition
+        this.showForm.set(true); //on montre le formulaire en mode édition
+        this.selectedId.set(studentId); //on met à jour l'ID sélectionné
+        console.log('Student sélectionné pour édition:', student);
+      }
     }
   }
 
@@ -156,7 +168,7 @@ export class StudentList {
       // Conserver l'ID original
       const updatedStudent = { ...studentDto, id: selectedStudent.id };
       
-      // Mettre à jour via le service (en supposant qu'il y a une méthode update)
+      // Mettre à jour via le service 
       this.svc.update(updatedStudent);
       
       // Logger la modification
