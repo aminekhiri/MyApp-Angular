@@ -6,7 +6,8 @@ import { signal } from '@angular/core';
   providedIn: 'root'
 })
 export class StudentService {
-  private readonly _students = signal<StudentDto[]>([    id: 1, firstname: 'Alice', name: 'Smith', filiere: 'DaMS', promo: 4, paye: 1000, date: new Date('2022-09-01')
+  private readonly _students = signal<StudentDto[]>([
+    { id: 1, firstname: 'Alice', name: 'Smith', filiere: 'DaMS', promo: 4, paye: 1000, date: new Date('2022-09-01')
   },
   { id: 2, firstname: 'Bob', name: 'Johnson', filiere: 'DaMS', promo: 3, paye: 1200, date: new Date('2021-09-01')
   },
