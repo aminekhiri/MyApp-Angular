@@ -1,0 +1,40 @@
+<div class="post-form-container">
+    <form class="add-post-form" [formGroup]="form" (ngSubmit)="submit()">
+        <h3>Ajouter un article</h3>
+        <label for="userId">ID Utilisateur:</label>
+        <input type="number" id="userId" formControlName="userId" min="1">
+        @if (form.controls['userId'].errors?.['required']){
+            <small>L'ID utilisateur est obligatoire</small>
+        }
+        @if (form.controls['userId'].errors?.['min']){
+            <small>L'ID utilisateur doit être supérieur à 0</small>
+        }
+
+        <label for="title">Titre:</label>
+        <input type="text" id="title" formControlName="title" placeholder="Entrez le titre de l'article">
+        @if (form.controls['title'].errors?.['required']){
+            <small>Le titre est obligatoire</small>
+        }
+        @if (form.controls['title'].errors?.['minlength']){
+            <small>Le titre doit faire au moins 3 caractères</small>
+        }
+
+        <label for="body">Contenu:</label>
+        <textarea id="body" formControlName="body" rows="5" placeholder="Entrez le contenu de l'article"></textarea>
+        @if (form.controls['body'].errors?.['required']){
+            <small>Le contenu est obligatoire</small>
+        }
+        @if (form.controls['body'].errors?.['minlength']){
+            <small>Le contenu doit faire au moins 10 caractères</small>
+        }
+
+        <div class="form-actions">
+            <button type="submit" [disabled]="form.invalid" class="btn-primary">
+            Ajouter 
+            </button>
+            <button type="button" (click)="form.reset()" class="btn-secondary">
+                Réinitialiser
+            </button>
+        </div>
+    </form>
+</div>

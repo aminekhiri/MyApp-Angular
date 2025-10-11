@@ -1,0 +1,42 @@
+<h1>Liste des articles</h1 >
+
+<app-post-form-component
+    (postSubmit)="onPostSubmitted($event)">
+</app-post-form-component>
+
+<div class="post-list">
+
+    @if (postsvc.posts(); as p){
+        @for (item of p; track item.id) {
+            <div class="post-item">
+                <h2> {{ item.title }}</h2>
+                <p> {{ item.body }}</p>
+            </div>
+        }
+
+    } 
+    @else {
+        <p>Chargement des articles...</p>
+    }
+
+    <!-- @if (postsResource.isLoading()) {
+        <p>Loading…</p>
+    }
+    @if (postsResource.error()) {
+        <p class="error">Error while loading posts</p>
+    }
+    @if (postsResource.hasValue()) {
+        <ul>
+            @for (p of postsResource.value(); track p.id) {
+                <li>
+                    <strong>{{ p.title }}</strong><br>
+                    {{ p.body }}
+                </li>
+            }
+        </ul>
+    } -->
+
+
+
+
+</div>
